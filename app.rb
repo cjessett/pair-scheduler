@@ -59,6 +59,6 @@ class SinatraWarden < Sinatra::Base
       env[key]['_method'] = 'post' if key == 'rack.request.form_hash'
     end
   end
+end
 
-  
   # Routes

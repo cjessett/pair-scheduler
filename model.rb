@@ -1,7 +1,3 @@
-require 'sinatra'
-require 'data_mapper'
-require 'faker'
-
 DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db.sqlite")
 
 class Group
@@ -19,14 +15,28 @@ class User
 
 	property :id, Serial
 	property :name, String
-	property :username, String
 	property :time_zone, String
-
+	property :username, String, length: 128
+	property :password, BCryptHash
+	
 	has n, :availabilities
 	has n, :pairings, :child_key => [ :source_id ]
 	has n, :matches, self, :through => :pairings, :via => :target
 
 	belongs_to :group
+
+	def authenticate(attempted_password)
+    # The BCrypt class, which `self.password` is an instance of, has `==` defined to compare a
+    # test plain text string to the encrypted string and converts `attempted_password` to a BCrypt
+    # for the comparison.
+    #
+    # But don't take my word for it, check out the source: https://github.com/codahale/bcrypt-ruby/blob/master/lib/bcrypt/password.rb#L64-L67
+    if self.password == attempted_password
+      true
+    else
+      false
+    end
+  end
 end
 
 class Assignment
