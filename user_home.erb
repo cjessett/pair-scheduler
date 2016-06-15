@@ -1,0 +1,19 @@
+<nav>
+<h3>Assignments</h3>
+	<ul>
+		<% @assignments.each do |assignment| %>
+		<li><a href="/schedules/<%= assignment.id %>"><%= assignment.number %> | <%= assignment.name %></a></li>
+		<% end %>
+	</ul>
+</nav>
+
+<section id="main">
+<h2>Welcome <%= @user['name'] %></h2>
+	
+<p><a href="/protected">Home</a> | <a href="/auth/logout">Log Out</a></p>
+
+<% if flash[:success] %>
+<div style="color:green;">
+<%= flash[:success] %>
+</div>
+<% end %>

@@ -129,7 +129,17 @@ class SinatraWarden < Sinatra::Base
   get '/protected' do
     env['warden'].authenticate!
 
-    'protected page'
+    redirect "/users/#{env['warden'].user.id}"
   end
 
+  before '/users/*' do
+    env['warden'].authenticate!
+  end
+
+  get '/users/:user_id' do
+    id = params[:user_id].to_i
+    @user = User.get (id)
+    @assignments = Assignment.all(group_id: @user.group_id)
+    erb :user_home
+  end
 end
