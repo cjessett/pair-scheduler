@@ -31,7 +31,7 @@
 <section id="display_availability">
 	<ul>
 		<% if @availabilities then @availabilities.each  do |availability| %>
-		<li><%= availability.date %> | <%= availability.start %> | <%= availability.end %></li>
+		<li><%= availability.date.to_time.strftime("%A %m/%d") %> | <%= availability.start.to_time.strftime("%I:%m%p") %> | <%= availability.end.to_time.strftime("%I:%m%p") %></li>
 		<% end %>
 		<% end %>
 	</ul>
