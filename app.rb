@@ -25,7 +25,7 @@ end
 class SinatraWarden < Sinatra::Base
 	enable :sessions
 	register Sinatra::Flash
-	set :session_secret, "supersecret" # try [env] variable
+	set :session_secret, ENV['SESSION_SECRET'] # try [env] variable
 
 	use Warden::Manager do |config|
     # Tell Warden how to save our User info into a session.
