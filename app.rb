@@ -147,21 +147,21 @@ class SinatraWarden < Sinatra::Base
     @user = env['warden'].user
     id = params[:assignment_id].to_i
     @assignments = Assignment.all(group_id: @user.group_id)
-    @current_assignment = Assignment.first(id: id)
+    @current_assignment = Assignment.get (id)
 
-    @availabilities = Availability.all(user_id: @user.id)
+    @availabilities = Availability.all(user_id: @user.id, assignment_id: id)
     erb :availability
   end
 
   post '/availability' do
     a = Availability.new
+    user = env['warden'].user
     a.date = params[:date]
     a.start = params[:start]
     a.end = params[:end]
-    user = env['warden'].user
     a.user_id = user.id
-    a.assignment_id = Assignment.get(params[:assignment]).id
+    a.assignment_id = params['assignment'].to_i
     a.save
-    redirect '/availability/:assignment_id'
+    redirect "/availability/#{params['assignment'].to_i}"
   end
 end

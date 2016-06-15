@@ -49,3 +49,7 @@ section#add_user select {
 	padding: 0.5em;
 	text-align: center;
 }
+
+section#display_availability li {
+	font-size: 120%;
+}

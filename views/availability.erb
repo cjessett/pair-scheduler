@@ -21,7 +21,7 @@
     <input type="time" name="start"><br>
     To:
     <input type="time" name="end"><br>
-    <input type="hidden" name="assignment" value="<%= @current_assignment.id %>"
+    <input type="hidden" name="assignment" value="<%= @current_assignment.id %>">
     <input type="hidden" name="group" value="<%= @user.group_id %>">
   	<input type="submit">
   </form>
@@ -31,7 +31,7 @@
 <section id="display_availability">
 	<ul>
 		<% if @availabilities then @availabilities.each  do |availability| %>
-		<li><%= availability.date.to_time.strftime("%A %m/%d") %> | <%= availability.start.to_time.strftime("%I:%m%p") %> | <%= availability.end.to_time.strftime("%I:%m%p") %></li>
+		<li><%= availability.date.to_time.strftime("%A %m/%d") %> | <strong><%= availability.start.to_time.strftime("%I:%m%p") %></strong> <em>until</em> <strong><%= availability.end.to_time.strftime("%I:%m%p") %></strong></li>
 		<% end %>
 		<% end %>
 	</ul>
