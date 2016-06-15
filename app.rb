@@ -62,3 +62,7 @@ class SinatraWarden < Sinatra::Base
 end
 
   # Routes
+  
+  get 'auth/login' do
+    erb :login
+  end
