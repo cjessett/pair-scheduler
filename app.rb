@@ -63,7 +63,7 @@ class SinatraWarden < Sinatra::Base
   # Routes
 
   get '/' do
-    erb :index
+    redirect '/auth/login'
   end
 
   get '/auth/login' do
@@ -94,6 +94,35 @@ class SinatraWarden < Sinatra::Base
 
     # Set the error and use a fallback if the message is not defined
     flash[:error] = env['warden.options'][:message] || "You must log in"
+    redirect '/auth/login'
+  end
+
+  get '/sign_up' do
+    current_user = env['warden'].user
+    if current_user == nil
+      @groups = Group.all
+      erb :sign_up
+    else
+      redirect '/protected'
+    end
+  end
+
+  post '/sign_up' do
+    username = params['user']['username']
+    p = params['user']['password']
+    confirm = params['confirm_user']['password']
+    user = User.first(username: username)
+    if user.nil? && p == confirm
+      u = User.new
+      u.username = username
+      u.password = p
+      u.time_zone = params[:time_zone].to_i
+      u.name = params[:first_last]
+      u.group_id = params[:group]
+      u.save
+    else
+      redirect '/sign_up'
+    end
     redirect '/auth/login'
   end
 
