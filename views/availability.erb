@@ -1,0 +1,28 @@
+<nav>
+<h3>Assignments</h3>
+	<ul>
+		<% @assignments.each do |assignment| %>
+		<li><a href="/availability/<%= assignment.id %>"><%= assignment.number %></a></li>
+		<% end %>
+	</ul>
+</nav>
+
+<section id="main">
+	
+<p><a href="/protected">Home</a> | <a href="/auth/logout">Log Out</a></p>
+
+<h2><%= @user['name'] %>'s Availability for <%= @current_assignment.number %></h2>
+
+<section id="add_availability">
+  <form action="/availability" method="post">
+  	Date:
+    <input type="date" name="date"><br>
+    From:
+    <input type="time" name="start"><br>
+    To:
+    <input type="time" name="end"><br>
+    <input type="hidden" name="assignment" value="<%= @current_assignment.id %>">
+    <input type="hidden" name="group" value="<%= @user.group_id %>">
+  	<input type="submit">
+  </form>
+</section>

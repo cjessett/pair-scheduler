@@ -142,4 +142,12 @@ class SinatraWarden < Sinatra::Base
     @assignments = Assignment.all(group_id: @user.group_id)
     erb :user_home
   end
+
+  get '/availability/:assignment_id' do
+    @user = env['warden'].user
+    id = params[:assignment_id].to_i
+    @assignments = Assignment.all(group_id: @user.group_id)
+    @current_assignment = Assignment.first(id: id)
+    erb :availability
+  end
 end

@@ -2,7 +2,7 @@
 <h3>Assignments</h3>
 	<ul>
 		<% @assignments.each do |assignment| %>
-		<li><a href="/schedules/<%= assignment.id %>"><%= assignment.number %></a></li>
+		<li><a href="/availability/<%= assignment.id %>"><%= assignment.number %></a></li>
 		<% end %>
 	</ul>
 </nav>
