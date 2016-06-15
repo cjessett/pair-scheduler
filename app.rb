@@ -100,7 +100,7 @@ class SinatraWarden < Sinatra::Base
   get '/sign_up' do
     current_user = env['warden'].user
     if current_user == nil
-      @groups = Group.all
+      @groups = Group.all(:id.not => 1) # don't allow access to 'admin' group
       erb :sign_up
     else
       redirect '/protected'

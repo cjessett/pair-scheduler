@@ -1,21 +1,23 @@
 <h3>New User</h3>
 <section id="add_user">
   <form action="/sign_up" method="post">
-  	<input type="text" name="first_last" placeholder="First and Last name"?>
-    <input type="text" name="user[username]" placeholder="Username">
-  	<input type="password" name="user[password]" placeholder="Password">
-  	<input type="password" name="confirm_user[password]" placeholder="Confirm Password">
+  	<input type="text" name="first_last" placeholder="First and Last name"><br>
+    <input type="text" name="user[username]" placeholder="Username"><br>
+  	<input type="password" name="user[password]" placeholder="Password"><br>
+  	<input type="password" name="confirm_user[password]" placeholder="Confirm Password"><br>
+  	Group:
   	<select name="group">
   		<% @groups.each do |group| %>
   		<option value="<%= group.id %>"><%= group.name %></option>
   		<% end %>
-  	</select>
+  	</select><br>
+  	Time Zone:
     <select name="time_zone">
 	    <option value="-5">EST</option>
 	    <option value="-6">CST</option>
 	    <option value="-7">MST</option>
 	    <option value="-8">PST</option>
-  	</select>
+  	</select><br>
   	<input type="submit">
   </form>
 </section>

@@ -28,6 +28,20 @@ section#main {
 	margin: 1em;
 }
 
+section#add_user input {
+	width: 200px;
+	margin: 0.3em;
+	padding: 0.5em;
+	text-align: center;
+}
+
+section#add_user select {
+	width: 100px;
+	margin: 0.3em;
+	padding: 0.5em;
+	text-align: center;
+}
+
 div#index{
 	text-align: center;
 }
