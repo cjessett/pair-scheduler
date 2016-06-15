@@ -13,7 +13,7 @@ end
 class User
 	include DataMapper::Resource
 
-	property :id, Serial
+	property :id, Serial, key: true
 	property :name, String
 	property :time_zone, String
 	property :username, String, length: 128

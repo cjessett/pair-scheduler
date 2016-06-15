@@ -5,21 +5,21 @@ Bundler.require
 require './model'
 
 Warden::Strategies.add(:password) do
-	def valid?
-		params['user'] && params['user']['username'] && params['user']['password']
-	end
+  def valid?
+    params['user'] && params['user']['username'] && params['user']['password']
+  end
 
-	def authenticate!
-		user = User.first(username: params['user']['username'])
+  def authenticate!
+    user = User.first(username: params['user']['username'])
 
-		if user.nil?
-			throw(:warden, message: "The username you entered does not exits.")
-		elsif user.authenticate(params['user']['password'])
-			success!(user)
-		else
-			throw(:warden, message: "The username and password combination ")
-		end
-	end
+    if user.nil?
+      throw(:warden, message: "The username you entered does not exist.")
+    elsif user.authenticate(params['user']['password'])
+      success!(user)
+    else
+      throw(:warden, message: "The username and password combination ")
+    end
+  end
 end
 
 class SinatraWarden < Sinatra::Base
@@ -59,10 +59,48 @@ class SinatraWarden < Sinatra::Base
       env[key]['_method'] = 'post' if key == 'rack.request.form_hash'
     end
   end
-end
 
   # Routes
-  
-  get 'auth/login' do
+
+  get '/' do
+    erb :index
+  end
+
+  get '/auth/login' do
     erb :login
   end
+
+  post '/auth/login' do
+    env['warden'].authenticate!
+
+    flash[:success] = "Successfully logged in"
+
+    if session[:return_to].nil?
+      redirect '/protected'
+    else
+      redirect session[:return_to]
+    end
+  end
+
+  get '/auth/logout' do
+    env['warden'].raw_session.inspect
+    env['warden'].logout
+    flash[:success] = "Successfully logged out"
+    redirect '/'
+  end
+
+  post '/auth/unauthenticated' do
+    session[:return_to] = env['warden.options'][:attempted_path] if session[:return_to].nil?
+
+    # Set the error and use a fallback if the message is not defined
+    flash[:error] = env['warden.options'][:message] || "You must log in"
+    redirect '/auth/login'
+  end
+
+  get '/protected' do
+    env['warden'].authenticate!
+
+    'protected page'
+  end
+
+end
