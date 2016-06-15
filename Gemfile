@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'sinatra', '1.4.7'
 gem 'sinatra-flash', '0.3.0', require: 'sinatra/flash'
-gem 'bcrypt-ruby', '3.1.5'
+gem 'bcrypt', '3.1.11'
 
 gem 'warden', '1.2.6'
 gem 'shotgun', '0.9.1'
