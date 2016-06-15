@@ -5,7 +5,6 @@ body {
 	margin: 10%;
 	margin-top: 1%;
 	width: 80%;
-	text-align: center;
 }
 
 nav {
@@ -14,6 +13,7 @@ nav {
 	border-right: 2px solid black;
 	margin: 1em;
 	padding: 0.5em;
+	padding-right: 1em;
 	padding-top: 2em;
 	height: 800px;
 }
@@ -26,6 +26,14 @@ section#main {
 	display: inline-block;
 	vertical-align: top;
 	margin: 1em;
+	text-align: center;
+	margin-left: 20%;
+}
+
+section#login {
+	text-align: center;
+	margin: 20%;
+	margin-top: 5%;
 }
 
 section#add_user input {
@@ -39,9 +47,5 @@ section#add_user select {
 	width: 100px;
 	margin: 0.3em;
 	padding: 0.5em;
-	text-align: center;
-}
-
-div#index{
 	text-align: center;
 }
