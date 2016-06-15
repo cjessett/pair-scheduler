@@ -1,0 +1,25 @@
+body {
+	font-family: helvetica;
+	background-color: pink;
+	display: inline-block;
+}
+
+nav {
+	display: inline-block;
+	vertical-align: top;
+	border-right: 2px solid black;
+	margin: 1em;
+	padding: 0.5em;
+	padding-top: 2em;
+	height: 800px;
+}
+
+nav ul {
+	margin: 1em;
+}
+
+section#main {
+	display: inline-block;
+	vertical-align: top;
+	margin: 1em;
+}
