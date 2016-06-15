@@ -94,8 +94,15 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 
 
-# Seeds
-
+# Create a test User
+if User.count == 0
+	@group = Group.create(name: "admins")
+	@group.save
+	@user = User.create(username: "admin")
+	@user.password = "admin"
+	@user.group_id = 1
+	@user.save
+end
 
 
 
