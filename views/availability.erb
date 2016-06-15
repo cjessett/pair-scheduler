@@ -21,8 +21,18 @@
     <input type="time" name="start"><br>
     To:
     <input type="time" name="end"><br>
-    <input type="hidden" name="assignment" value="<%= @current_assignment.id %>">
+    <input type="hidden" name="assignment" value="<%= @current_assignment.id %>"
     <input type="hidden" name="group" value="<%= @user.group_id %>">
   	<input type="submit">
   </form>
+</section>
+
+
+<section id="display_availability">
+	<ul>
+		<% if @availabilities then @availabilities.each  do |availability| %>
+		<li><%= availability.date %> | <%= availability.start %> | <%= availability.end %></li>
+		<% end %>
+		<% end %>
+	</ul>
 </section>
